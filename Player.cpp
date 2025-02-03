@@ -1,5 +1,6 @@
-#include "Player.h"
+﻿#include "Player.h"
 
+// コンストラクタ
 Player::Player(int isAlive, const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
 	isAlive_ = isAlive;
 	pos_ = pos;
@@ -10,23 +11,29 @@ Player::Player(int isAlive, const Vector2 &pos, const Vector2 &velocity, const V
 	shootCoolTime_ = 1;
 }
 
+// 更新処理
 void Player::Update(const char keys[], const char preKeys[]) {
 	if (keys == nullptr || preKeys == nullptr) {
 		return;
 	}
 
+	// 移動
 	Move(keys);
 
+	// 弾を発射
 	Shoot(keys);
 }
 
+// 移動処理
 void Player::Move(const char keys[]) {
+	// 縦移動
 	if (keys[DIK_W]) {
 		pos_.y -= velocity_.y;
 	} else if (keys[DIK_S]) {
 		pos_.y += velocity_.y;
 	}
 
+	// 横移動
 	if (keys[DIK_A]) {
 		pos_.x -= velocity_.x;
 	} else if (keys[DIK_D]) {
@@ -34,7 +41,9 @@ void Player::Move(const char keys[]) {
 	}
 }
 
+// 発射処理
 void Player::Shoot(const char keys[]) {
+	// クールタイムをカウント
 	if (keys[DIK_SPACE]) {
 		if (shootCoolTime_ > 0) {
 			shootCoolTime_--;
@@ -43,6 +52,7 @@ void Player::Shoot(const char keys[]) {
 		}
 	}
 
+	// クールタイムが0になると弾を発射
 	if (shootCoolTime_ <= 0) {
 		Bullet bullet(
 			true,
@@ -55,8 +65,11 @@ void Player::Shoot(const char keys[]) {
 		bullets_.push_back(bullet);
 	}
 
+	// 弾の更新処理
 	for (auto it = bullets_.begin(); it != bullets_.end();) {
 		it->Move();
+
+		// 画面外にいった弾を削除
 		if (it->GetPos().y < 0.0f) {
 			it = bullets_.erase(it);
 		} else {
@@ -65,6 +78,7 @@ void Player::Shoot(const char keys[]) {
 	}
 }
 
+// 描画処理
 void Player::Draw() {
 	Novice::DrawBox(
 		static_cast<int>(pos_.x - radius_.x),

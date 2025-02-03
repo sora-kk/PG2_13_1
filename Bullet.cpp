@@ -1,5 +1,6 @@
-#include "Bullet.h"
+﻿#include "Bullet.h"
 
+// コンストラクタ
 Bullet::Bullet(int isAlive, const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
 	isAlive_ = isAlive;
 	pos_ = pos;
@@ -9,10 +10,12 @@ Bullet::Bullet(int isAlive, const Vector2 &pos, const Vector2 &velocity, const V
 	color_ = color;
 }
 
+// 移動処理
 void Bullet::Move() {
 	pos_.y -= velocity_.y;
 }
 
+// 描画処理
 void Bullet::Draw() const{
 	Novice::DrawEllipse(
 		static_cast<int>(pos_.x),

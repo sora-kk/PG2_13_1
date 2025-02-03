@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const char kWindowTitle[] = "LC1C_11_ダイドウソラ_タイトル";
+const char kWindowTitle[] = "LC1C_11_ダイドウソラ_PG2_13_1";
 
 // ローカル変数の宣言と初期化
 const float kWinWidth = 1280.0f;
@@ -59,6 +59,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		RED
 	);
 
+	// 当たり判定
 	std::unique_ptr<IsHit>isHit;
 
 	// キー入力結果を受け取る箱
@@ -89,6 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		enemy1->Move();
 		enemy2->Move();
 
+		// Rを押すとリスポーン
 		if (keys[DIK_R] && !preKeys[DIK_R]) {
 			if (!enemy1->GetIsAlive() || !enemy2->GetIsAlive()) {
 				enemy1->SetIsAlive(true);

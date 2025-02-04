@@ -23,6 +23,16 @@ void Enemy::Move() {
 	}
 }
 
+// 死亡処理
+void Enemy::Defeat() {
+	isAlive_ = false;
+}
+
+// リスポーン処理
+void Enemy::Respawn(){
+	isAlive_ = true;
+}
+
 // 描画処理
 void Enemy::Draw() {
 	for (Enemy *enemy : enemies_) {
@@ -36,9 +46,4 @@ void Enemy::Draw() {
 			);
 		}
 	}
-}
-
-// セッター
-void Enemy::SetIsAlive(int isAlive) {
-	isAlive_ = isAlive;
 }

@@ -92,10 +92,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// Rを押すとリスポーン
 		if (keys[DIK_R] && !preKeys[DIK_R]) {
-			if (!enemy1->GetIsAlive() || !enemy2->GetIsAlive()) {
-				enemy1->SetIsAlive(true);
-				enemy2->SetIsAlive(true);
-			}
+			enemy1->Respawn();
+			enemy2->Respawn();
 		}
 
 		// 当たり判定
@@ -104,8 +102,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				if (isHit->Judge(it->GetPos(), it->GetRadius().x, enemy1->GetPos(), enemy1->GetRadius().x) ||
 					isHit->Judge(it->GetPos(), it->GetRadius().x, enemy2->GetPos(), enemy2->GetRadius().x)) {
 					it = player->bullets_.erase(it);
-					enemy1->SetIsAlive(false);
-					enemy2->SetIsAlive(false);
+					enemy1->Defeat();
+					enemy2->Defeat();
 				} else {
 					it++;
 				}

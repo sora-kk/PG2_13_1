@@ -20,6 +20,16 @@ public:
 	void Move();
 
 	/// <summary>
+	/// 死亡処理
+	/// </summary>
+	void Defeat();
+
+	/// <summary>
+	/// リスポーン処理
+	/// </summary>
+	void Respawn();
+
+	/// <summary>
 	/// 描画処理
 	/// </summary>
 	static void Draw();
@@ -28,9 +38,6 @@ public:
 	Vector2 GetPos() { return pos_; };
 	Vector2 GetRadius() { return radius_; };
 	int GetIsAlive() { return isAlive_; };
-
-	// セッター
-	void SetIsAlive(int isAlive);
 
 private:
 	static std::vector<Enemy *> enemies_;

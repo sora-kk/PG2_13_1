@@ -13,7 +13,7 @@ public:
 	/// <param name="acceleration"> 加速度 </param>
 	/// <param name="radius"> 半径 </param>
 	/// <param name="color"> 矩形の色 </param>
-	Player(int isAlive, const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color);
+	Player(const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color);
 
 	/// <summary>
 	/// 更新処理

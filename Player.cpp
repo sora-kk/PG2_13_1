@@ -1,8 +1,7 @@
 ﻿#include "Player.h"
 
 // コンストラクタ
-Player::Player(int isAlive, const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
-	isAlive_ = isAlive;
+Player::Player(const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
 	pos_ = pos;
 	velocity_ = velocity;
 	acceleration_ = acceleration;
@@ -55,7 +54,6 @@ void Player::Shoot(const char keys[]) {
 	// クールタイムが0になると弾を発射
 	if (shootCoolTime_ <= 0) {
 		Bullet bullet(
-			true,
 			pos_,
 			Vector2{ 8.0f,8.0f },
 			Vector2{ 0.0f,0.0f },

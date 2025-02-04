@@ -6,7 +6,6 @@
 
 class Object {
 protected:
-	int isAlive_;
 	Vector2 pos_;
 	Vector2 velocity_;
 	Vector2 acceleration_;

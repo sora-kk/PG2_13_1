@@ -1,8 +1,7 @@
 ﻿#include "Bullet.h"
 
 // コンストラクタ
-Bullet::Bullet(int isAlive, const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
-	isAlive_ = isAlive;
+Bullet::Bullet(const Vector2 &pos, const Vector2 &velocity, const Vector2 &acceleration, const Vector2 &radius, unsigned int color) {
 	pos_ = pos;
 	velocity_ = velocity;
 	acceleration_ = acceleration;

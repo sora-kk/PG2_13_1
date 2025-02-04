@@ -13,8 +13,6 @@ const char kWindowTitle[] = "LC1C_11_ダイドウソラ_PG2_13_1";
 const float kWinWidth = 1280.0f;
 const float kWinHeight = 720.0f;
 
-// 静的メンバ変数の初期化
-std::vector<Enemy*> Enemy::enemies_;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -32,7 +30,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// プレイヤー
 	std::unique_ptr<Player> player = std::make_unique<Player>(
-		true,
 		Vector2{ 600.0f,600.0f },
 		Vector2{ 8.0f,8.0f },
 		Vector2{ 0.0f,0.0f },
@@ -42,7 +39,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// エネミー
 	Enemy *enemy1 = new Enemy(
-		true,
 		Vector2{ 200.0f,200.0f },
 		Vector2{ 8.0f,8.0f },
 		Vector2{ 0.0f,0.0f },
@@ -51,7 +47,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	);
 
 	Enemy *enemy2 = new Enemy(
-		true,
 		Vector2{ 400.0f,400.0f },
 		Vector2{ 8.0f,8.0f },
 		Vector2{ 0.0f,0.0f },
@@ -92,18 +87,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// Rを押すとリスポーン
 		if (keys[DIK_R] && !preKeys[DIK_R]) {
-			enemy1->Respawn();
-			enemy2->Respawn();
+			enemy1->SetIsAlive(true);
 		}
 
 		// 当たり判定
-		if (enemy1->GetIsAlive() || enemy2->GetIsAlive()) {
+		if (enemy1->GetIsAlive()) {
 			for (auto it = player->bullets_.begin(); it != player->bullets_.end();) {
 				if (isHit->Judge(it->GetPos(), it->GetRadius().x, enemy1->GetPos(), enemy1->GetRadius().x) ||
 					isHit->Judge(it->GetPos(), it->GetRadius().x, enemy2->GetPos(), enemy2->GetRadius().x)) {
 					it = player->bullets_.erase(it);
-					enemy1->Defeat();
-					enemy2->Defeat();
+					enemy1->SetIsAlive(false);
 				} else {
 					it++;
 				}
@@ -122,7 +115,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		player->Draw();
 
 		// エネミー
-		Enemy::Draw();
+		if (enemy1->GetIsAlive()) {
+			enemy1->Draw();
+			enemy2->Draw();
+		}
 
 		///===================
 		/// ↑ 描画処理 ここまで
